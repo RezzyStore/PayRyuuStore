@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment Ryuu Store</title>
+  <style>
+    body {
+      margin: 0;
+      background: url('https://files.catbox.moe/0cs6o7.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Orbitron', sans-serif;
+      color: white;
+    }
+
+    .menu-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 999;
+      font-size: 24px;
+      background: #ff2c2c;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff2c2c;
+    }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      padding-top: 60px;
+      transform: translateX(-100%);
+      transition: 0.3s ease;
+      z-index: 998;
+    }
+
+    .drawer.open {
+      transform: translateX(0);
+    }
+
+    .drawer a {
+      display: block;
+      padding: 15px 20px;
+      color: #ff2c2c;
+      text-decoration: none;
+      font-weight: bold;
+      border-bottom: 1px solid #333;
+    }
+
+    .drawer a:hover {
+      background: #222;
+    }
+
+    .page {
+      display: none;
+      padding: 80px 20px 40px;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .welcome-title {
+      text-align: center;
+      font-size: 2.5em;
+      color: #ff2c2c;
+      text-shadow: 0 0 10px #ff2c2c;
+      margin-bottom: 20px;
+    }
+
+    .welcome-text {
+      max-width: 600px;
+      margin: auto;
+      text-align: left;
+      line-height: 1.6em;
+      color: white;
+      font-size: 1em;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ff2c2c33;
+    }
+
+    .payment-container {
+      max-width: 400px;
+      margin: auto;
+      border: 2px solid #ff2c2c;
+      border-radius: 15px;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      box-shadow: 0 0 15px #ff2c2c;
+    }
+
+    .payment-title {
+      text-align: center;
+      font-size: 1.6em;
+      color: #ff2c2c;
+      margin-bottom: 25px;
+      text-shadow: 0 0 10px #ff2c2c;
+    }
+
+    .payment-box {
+      background: #111822;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 5px #ff2c2c;
+      text-align: center;
+    }
+
+    .payment-box h3 {
+      margin: 0 0 8px;
+      color: #ff2c2c;
+      font-size: 1em;
+    }
+
+    .payment-box p {
+      margin: 0;
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+
+    .copy-btn {
+      margin-top: 10px;
+      background: #ff2c2c;
+      border: none;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff2c2c;
+    }
+
+    .footer {
+      margin-top: 25px;
+      text-align: center;
+      color: #999;
+      font-size: 0.8em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menu Button -->
+  <button class="menu-btn" onclick="toggleDrawer()">☰ Menu</button>
+
+  <!-- Drawer -->
+  <div class="drawer" id="drawer">
+    <a href="#" onclick="showPage('welcome')">🏠 Dashboard</a>
+    <a href="#" onclick="showPage('payment')">💳 Metode Pembayaran</a>
+  </div>
+
+  <!-- Welcome Page -->
+  <div class="page active" id="welcome">
+    <div class="welcome-title">Welcome to Dashboard RyuuStore</div>
+    <div class="welcome-text">
+      <p>🔥 Butuh bot auto fast respon? Atau jasa setup Server impian?<br>Ryuu Store solusinya!</p>
+      <p>Kami siap bantu dari A sampai Z — cepat, rapi, dan terpercaya ✅</p>
+      <p>💬 > 🌐 Jual Bot | Setup Server | Jasa Panel</p>
+      <p>🎯 Full Support • Fast Respond • Siap Pakai</p>
+      <p>🎲 Butuh GM buat server? </p>
+      <p>sini ke Ryuu Store Solusinya </p>
+      <p>kamu bisa buat Gm murah di Ryuu store </p>
+      <p>📍Order di Ryuu Store sekarang!</p>
+      <p><strong>Untuk Metode Pembayaran Ryuu Store</strong><br>Berada Di Tombol Menu Di Sebelah Kiri Yah Kak...</p>
+    </div>
+
+    <!-- Discord Button -->
+    <div style="text-align: center; margin-top: 30px;">
+      <a href="https://discord.gg/hbszW6UPCJ" target="_blank" style="
+        display: inline-block;
+        padding: 12px 25px;
+        background-color: #ff2c2c;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 10px;
+        box-shadow: 0 0 12px #ff2c2c;
+        transition: 0.3s ease;
+      ">🌐 Join Discord RyuuStore</a>
+    </div>
+  </div>
+
+  <!-- Payment Page -->
+  <div class="page" id="payment">
+    <div class="payment-container">
+      <div class="payment-title">💳 Metode Pembayaran</div>
+
+      <div class="payment-box">
+        <h3>Nomor DANA</h3>
+        <p id="dana">082169234120</p>
+        <button class="copy-btn" onclick="copyText('dana')">Salin</button>
+      </div>
+
+      <div class="payment-box">
+        <h3>Nomor GoPay</h3>
+        <p id="gopay">082169234120</p>
+        <button class="copy-btn" onclick="copyText('gopay')">Salin</button>
+      </div>
+
+      <div class="payment-box">
+        <h3>Nomor OVO</h3>
+        <p id="ovo">Tidak Tersedia</p>
+        <button class="copy-btn" onclick="copyText('ovo')">Salin</button>
+      </div>
+
+      <div class="footer">RYUU4YOU | NEW COMMUNITY</div>
+    </div>
+  </div>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById("drawer").classList.toggle("open");
+    }
+
+    function showPage(pageId) {
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+      document.getElementById(pageId).classList.add("active");
+      document.getElementById("drawer").classList.remove("open");
+    }
+
+    function copyText(id) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Teks disalin: " + text);
+      });
+    }
+  </script>
+
+</body>
+</html>
